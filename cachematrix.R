@@ -15,6 +15,8 @@ makeCacheMatrix <- function(x = matrix()) {
   get <- function() x
   setinverse <- function(inverse) m <<- inverse
   getinverse <- function() m
+  
+  ## Create a list of pointers for methods that operate on this matrix-like object.
   list(set = set, get = get,
          setinverse = setinverse,
          getinverse = getinverse)
@@ -35,6 +37,7 @@ cacheSolve <- function(x, ...) {
 	return(m)
 	}
 
+  ## Check to see if inverse was already calculated. If so, return from cache. Else compute and store it.
 	data <- x$get()
 	m <- solve(data)
 	x$setinverse(m)
